@@ -5,7 +5,7 @@
     <form id="creditForm">
       <input type="hidden" name="id" />
       <!-- ID oculto para editar -->
-      <label for="cliente">Cliente:</label>
+      <label for="cliente"><span class="required">*</span>Cliente:</label>
       <input
         type="text"
         name="cliente"
@@ -18,7 +18,7 @@
         minlength="3"
       />
       <p class="error-message" id="cliente-error">El campo solo puede contener letras y espacios.</p>
-      <label for="monto">Monto:</label>
+      <label for="monto"><span class="required">*</span>Monto:</label>
       <input
         type="text"
         name="monto"
@@ -28,7 +28,7 @@
         title="El monto debe ser un número con hasta dos decimales."
       />
       <p class="error-message" id="monto-error">Ingrese un número valido con hasta 2 decimales.</p>
-      <label for="tasa_interes">Tasa de Interés (%):</label>
+      <label for="tasa_interes"><span class="required">*</span>Tasa de Interés (%):</label>
       <input
         type="text"
         name="tasa_interes"
@@ -38,7 +38,7 @@
         title="La tasa de interés debe ser un número con hasta dos decimales."
       />
       <p class="error-message" id="tasa-error">Ingrese un número válido con máximo 2 decimales.</p>
-      <label for="plazo">Plazo (meses):</label>
+      <label for="plazo"><span class="required">*</span>Plazo (meses):</label>
       <input
         type="text"
         name="plazo"
@@ -48,7 +48,7 @@
         title="El plazo debe ser un número entero."
       />
       <p class="error-message" id="plazo-error">Ingrese un número válido con máximo 2 decimales.</p>
-      <label for="fecha_otorgamiento">Fecha de Otorgamiento:</label>
+      <label for="fecha_otorgamiento"><span class="required">*</span>Fecha de Otorgamiento:</label>
       <input
         type="date"
         name="fecha_otorgamiento"

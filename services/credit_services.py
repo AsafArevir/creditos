@@ -1,6 +1,6 @@
 # Definición de servicios para manejar la lógica de negocio relacionada con créditos.
 # Estos servicios interactúan con el modelo de datos y la base de datos.
-from flask import jsonify
+from flask import abort, jsonify
 from models import db, Credito
 from sqlalchemy.sql import func
 from datetime import date
@@ -13,8 +13,10 @@ def get_all_creditos():
 
 
 def get_credito_by_id(credito_id):
-    # Obtiene un crédito por su ID.
-    return Credito.query.get_or_404(credito_id)
+    credito = db.session.get(Credito, credito_id)
+    if not credito:
+        abort(404)
+    return credito
 
 
 def create_credito(data):
@@ -37,7 +39,9 @@ def create_credito(data):
 
 def update_credito(credito_id, data):
     # Actualiza un crédito existente.
-    credito = Credito.query.get_or_404(credito_id)
+    credito = db.session.get(Credito, credito_id)
+    if not credito:
+        abort(404)
     credito.cliente = data.get("cliente", credito.cliente)
     credito.monto = data.get("monto", credito.monto)
     credito.tasa_interes = data.get("tasa_interes", credito.tasa_interes)
@@ -48,24 +52,12 @@ def update_credito(credito_id, data):
 
 def delete_credito(credito_id):
     # Elimina un crédito de la base de datos.
-    credito = Credito.query.get_or_404(credito_id)
+    credito = db.session.get(Credito, credito_id)
+    if not credito:
+        abort(404)
     db.session.delete(credito)
     db.session.commit()
     return True
-
-
-# def get_statistics():
-#     # Obtiene estadísticas resumidas de los créditos.
-#     total = db.session.query(func.sum(Credito.monto)).scalar() or 0
-#     por_cliente = (
-#         db.session.query(Credito.cliente, func.sum(Credito.monto))
-#         .group_by(Credito.cliente).all()
-#     )
-#     return {
-#         "total": total,
-#         "por_cliente": [{"cliente": c, "total": t} for c, t in por_cliente]
-#     }
-
 
 def get_statistics(min_monto=None, max_monto=None):
     query = db.session.query(Credito)
@@ -77,13 +69,11 @@ def get_statistics(min_monto=None, max_monto=None):
 
     # calcular total respetando filtros
     total = query.with_entities(func.sum(Credito.monto)).scalar() or 0
-    total_count = query.with_entities(func.count(Credito.id)).scalar() or 0 
+    total_count = query.with_entities(func.count(Credito.id)).scalar() or 0
 
     por_cliente = (
         query.with_entities(
-            Credito.cliente,
-            func.sum(Credito.monto),
-            func.count(Credito.id)
+            Credito.cliente, func.sum(Credito.monto), func.count(Credito.id)
         )
         .group_by(Credito.cliente)
         .all()
@@ -95,5 +85,5 @@ def get_statistics(min_monto=None, max_monto=None):
         "por_cliente": [
             {"cliente": c, "total": float(t or 0), "count": n}
             for c, t, n in por_cliente
-        ]
+        ],
     }

@@ -41,6 +41,7 @@ python -m venv venv
 venv\Scripts\activate
 ```
 
+
 ### 3. Instala las dependencias
 
 Con requirements.txt:
@@ -52,7 +53,7 @@ pip install -r requirements.txt
 O manualmente:
 
 ```sh
-pip install flask flask-sqlalchemy
+pip install flask flask-sqlalchemy pytest pytest-mock
 ```
 
 ### 4. Ejecuta la aplicación
@@ -116,10 +117,29 @@ creditos/
 │       ├── app.js
 │       └── validaciones.js
 │
+├── tests/
+│   └── test_service.py
 └── templates/
     ├── creditos.html
     ├── form_credito.html
     └── layout.html
+---
+
+## Pruebas y tests
+
+El proyecto incluye pruebas unitarias para los servicios principales, ubicadas en la carpeta `tests/` y escritas usando `pytest` y `pytest-mock`. Los tests usan mocks para no modificar la base de datos real.
+
+### Ejecutar los tests
+
+Desde la raíz del proyecto, ejecuta:
+
+```sh
+pytest -v
+```
+
+Esto ejecutará todos los tests y mostrará el resultado detallado.
+
+---
 ```
 
 ---

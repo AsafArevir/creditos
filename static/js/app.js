@@ -162,7 +162,7 @@ async function fetchSummary(min = null, max = null) {
                             let idx = context.dataIndex;
                             let monto = values[idx].toLocaleString();
                             let numCreditos = counts[idx];
-                            return `Monto: $${monto} (${numCreditos} créditos)`;
+                            return `Monto: $${monto} (No. de créditos: ${numCreditos})`;
                         }
                     }
                 },
