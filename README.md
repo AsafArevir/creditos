@@ -1,4 +1,4 @@
-# Heeramienta de Registro de Créditos
+# Herramienta de Registro de Créditos
 
 Aplicación web para la gestión y visualización de créditos otorgados a clientes, desarrollada con **Flask** y **SQLAlchemy**.
 
