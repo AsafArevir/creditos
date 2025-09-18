@@ -1,0 +1,69 @@
+<!-- Modal -->
+<div id="modal" class="modal hidden">
+  <div class="modal-content">
+    <h2 id="modalTitle">Registrar Crédito</h2>
+    <form id="creditForm">
+      <input type="hidden" name="id" />
+      <!-- ID oculto para editar -->
+      <label for="cliente">Cliente:</label>
+      <input
+        type="text"
+        name="cliente"
+        placeholder="Ingrese el Cliente"
+        class="modal-input"
+        required
+        pattern="^[a-zA-ZáéíóúÁÉÍÓÚüñÑ\s]+$"
+        title="El cliente solo puede contener letras y espacios."
+        maxlength="100"
+        minlength="3"
+      />
+      <p class="error-message" id="cliente-error">El campo solo puede contener letras y espacios.</p>
+      <label for="monto">Monto:</label>
+      <input
+        type="text"
+        name="monto"
+        placeholder="Ingrese el Monto"
+        required
+        pattern="^\d+(\.\d{1,2})?$"
+        title="El monto debe ser un número con hasta dos decimales."
+      />
+      <p class="error-message" id="monto-error">Ingrese un número valido con hasta 2 decimales.</p>
+      <label for="tasa_interes">Tasa de Interés (%):</label>
+      <input
+        type="text"
+        name="tasa_interes"
+        placeholder="Ingrese la Tasa de Interés (%)"
+        required
+        pattern="^\d+(\.\d{1,2})?$"
+        title="La tasa de interés debe ser un número con hasta dos decimales."
+      />
+      <p class="error-message" id="tasa-error">Ingrese un número válido con máximo 2 decimales.</p>
+      <label for="plazo">Plazo (meses):</label>
+      <input
+        type="text"
+        name="plazo"
+        placeholder="Ingrese el Plazo (meses)"
+        required
+        pattern="^\d+$"
+        title="El plazo debe ser un número entero."
+      />
+      <p class="error-message" id="plazo-error">Ingrese un número válido con máximo 2 decimales.</p>
+      <label for="fecha_otorgamiento">Fecha de Otorgamiento:</label>
+      <input
+        type="date"
+        name="fecha_otorgamiento"
+        placeholder="Seleccione la Fecha de Otorgamiento"
+        required
+      />
+      <p class="error-message" id="fecha-error">Seleccione una fecha.</p>
+      <div class="modal-actions">
+        <button type="button" class="btn btn-secondary" onclick="closeModal()">
+          Cancelar
+        </button>
+        <button type="submit" class="btn btn-primary" id="btnGuardar">Guardar</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<script src="{{ url_for('static', filename='js/validaciones.js') }}"></script>

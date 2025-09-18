@@ -1,0 +1,71 @@
+{% extends "layout.html" %} {% block title %}Registro de Créditos{% endblock %}
+{% block content %}
+<!-- Botón registrar -->
+<div class="actions">
+  <h2 class="title-actions">Lista de Créditos</h2>
+  <button onclick="openModal()" class="btn btn-primary">
+    Registrar Crédito
+  </button>
+</div>
+
+<!-- Tabla -->
+<div class="table-container">
+  <table class="table">
+    <thead>
+      <tr>
+        <th style="display: none">ID</th>
+        <th>Cliente</th>
+        <th>Monto</th>
+        <th>Tasa</th>
+        <th>Plazo</th>
+        <th>Fecha</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody id="creditsTable">
+      <!-- Filas dinámicas -->
+    </tbody>
+  </table>
+</div>
+
+<!-- Gráfica -->
+<div class="card chart-container">
+  <div class="chart-wrapper">
+    <canvas id="summaryChart" height="120"></canvas>
+  </div>
+
+  <!-- Filtros -->
+  <div class="chart-filters">
+    <h3>Filtros</h3>
+    <form id="chartForm">
+      <label for="minMonto">Monto mínimo:</label>
+      <input type="text" id="minMonto" placeholder="0" />
+      <p id="minMonto-error" class="error-message">
+        Ingrese un número válido con máximo 2 decimales.
+      </p>
+
+      <label for="maxMonto">Monto máximo:</label>
+      <input type="text" id="maxMonto" placeholder="10000" />
+      <p id="maxMonto-error" class="error-message">
+        Ingrese un número válido con máximo 2 decimales.
+      </p>
+      <div class="filter-button">
+        <button
+          type="submit"
+          class="btn btn-primary"
+          id="btnFiltrar"
+          onclick="applyFilters()"
+        >
+          Aplicar
+        </button>
+      </div>
+    </form>
+    <div class="total-label">
+      Créditos otorgados: <span id="totalCreditos">0</span><br />
+      Monto total: <span id="totalMonto">$0</span>
+    </div>
+  </div>
+</div>
+
+<!-- Incluir el modal desde otro template -->
+{% include "form_credito.html" %} {% endblock %}

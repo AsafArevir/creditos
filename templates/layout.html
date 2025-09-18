@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>{% block title %}Gestión de Créditos{% endblock %}</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2"></script>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar">
+    <h1 class="navbar-title">Créditos</h1>
+    <img src="https://i.pravatar.cc/40" alt="Avatar" class="avatar">
+  </nav>
+
+  <!-- Contenido dinámico -->
+  <main class="container">
+    {% block content %}{% endblock %}
+  </main>
+
+  <!-- JS global -->
+  <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+</body>
+</html>
