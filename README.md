@@ -9,7 +9,7 @@ Aplicación web para la gestión y visualización de créditos otorgados a clien
 ### 1. Clona el repositorio
 
 ```sh
-git clone <URL_DEL_REPOSITORIO>
+git clone https://github.com/AsafArevir/creditos.git
 ```
 #### Ingresar a la Carpeta
 
