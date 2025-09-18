@@ -123,6 +123,8 @@ creditos/
     ├── creditos.html
     ├── form_credito.html
     └── layout.html
+```
+
 ---
 
 ## Pruebas y tests
@@ -138,9 +140,6 @@ pytest -v
 ```
 
 Esto ejecutará todos los tests y mostrará el resultado detallado.
-
----
-```
 
 ---
 
