@@ -13,16 +13,8 @@ git clone https://github.com/AsafArevir/creditos.git
 ```
 #### Ingresar a la Carpeta
 
-#### En Linux/Mac:
-
 ```sh
 cd creditos
-```
-
-#### En Windows:
-
-```sh
-dir creditos
 ```
 
 ### 2. Crea y activa un entorno virtual
