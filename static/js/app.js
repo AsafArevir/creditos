@@ -1,4 +1,5 @@
 let editMode = false;
+let deleteId = null;
 
 async function fetchCredits() {
     const res = await fetch("/api/creditos");
@@ -18,7 +19,7 @@ async function fetchCredits() {
         <button class='btn btn-primary' onclick='openModal(true, ${JSON.stringify(c)})'>
           Editar
         </button>
-        <button class='btn btn-danger' onclick="deleteCredit(${c.id})">
+        <button class='btn btn-danger' onclick="openConfirmModal(${c.id})">
           Eliminar
         </button>
       </td>
@@ -26,12 +27,28 @@ async function fetchCredits() {
         tbody.appendChild(tr);
     });
 }
+function openConfirmModal(id) {
+  deleteId = id;
+  document.getElementById("confirmModal").classList.remove("hidden");
+}
 
-async function deleteCredit(id) {
-    await fetch(`/api/creditos/${id}`, { method: "DELETE" });
+function closeConfirmModal() {
+  deleteId = null;
+  document.getElementById("confirmModal").classList.add("hidden");
+}
+
+document.getElementById("confirmDeleteBtn").addEventListener("click", async () => {
+  if (!deleteId) return;
+  const res = await fetch(`/api/creditos/${deleteId}`, { method: "DELETE" });
+  if (res.ok) {
+    console.log("Crédito eliminado");
+    closeConfirmModal();
     await fetchCredits();
     await fetchSummary();
-}
+  } else {
+    alert("❌ Error al eliminar el crédito");
+  }
+});
 
 // Modal helpers
 function openModal(isEdit = false, credit = null) {

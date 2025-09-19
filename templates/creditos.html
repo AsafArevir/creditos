@@ -67,5 +67,16 @@
   </div>
 </div>
 
+<div id="confirmModal" class="modal hidden">
+  <div class="modal-content">
+    <h2>Confirmar eliminación</h2>
+    <p>¿Estás seguro de eliminar este crédito?</p>
+    <div class="modal-actions">
+      <button type="button" class="btn btn-secondary" onclick="closeConfirmModal()">Cancelar</button>
+      <button type="button" class="btn btn-danger" id="confirmDeleteBtn">Eliminar</button>
+    </div>
+  </div>
+</div>
+
 <!-- Incluir el modal desde otro template -->
 {% include "form_credito.html" %} {% endblock %}

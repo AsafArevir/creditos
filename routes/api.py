@@ -37,7 +37,7 @@ def edit_credito(credito_id):
 @api_bp.route('/creditos/<int:credito_id>', methods=['DELETE'])
 def delete_credit(credito_id):
     delete_credito(credito_id)
-    return jsonify({'message': 'Crédito eliminado'}), 204
+    return jsonify({'message': 'Crédito eliminado'}), 200
 
 # @api_bp.route('/creditos/statistics', methods=['GET'])
 # def credit_statistics():
