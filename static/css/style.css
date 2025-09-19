@@ -115,14 +115,14 @@ body {
     display: flex;
     gap: 20px;
     align-items: flex-start;
+    flex-wrap: wrap; 
 }
 
 .chart-wrapper {
-    flex: 3;
+    flex: 2;
 }
 
 .chart-filters {
-    width: 100%;
     flex: 1;
     background: #f9fafb;
     padding: 12px;
