@@ -1,13 +1,13 @@
 // Validaciones para el formulario de crédito
 document.addEventListener('DOMContentLoaded', () => {
     const form = document.getElementById('creditForm');
-    const btnGuardar = form.querySelector('button[id="btnGuardar"]');
 
     const inputs = [
+        // Validaciones de campos
         {
             input: form.querySelector('input[name="cliente"]'),
             error: document.getElementById('cliente-error'),
-            validator: val => val.trim() !== '' && /^[a-zA-ZáéíóúÁÉÍÓÚüñÑ\s]{3,}$/.test(val.trim()),
+            validator: val => val.trim() !== '' && /^[a-zA-ZáéíóúÁÉÍÓÚüñÑ\s]{3,100}$/.test(val.trim()),
             touched: false
         },
         {
@@ -36,7 +36,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     ];
 
-    // Función para validar un input y mostrar error solo si se ha tocado
     function validateInput(f, forceShow = false) {
         const val = f.input.value;
         const isValid = f.validator(val);
@@ -52,7 +51,6 @@ document.addEventListener('DOMContentLoaded', () => {
         return isValid;
     }
 
-    // Marcar como "tocado" al enfocar el input
     inputs.forEach(f => {
         f.input.addEventListener('input', () => {
             f.touched = true;
@@ -68,13 +66,12 @@ document.addEventListener('DOMContentLoaded', () => {
     form.addEventListener('submit', e => {
         let allValid = true;
 
-        // Validamos todos los campos y forzamos mostrar errores
         inputs.forEach(f => {
             if (!validateInput(f, true)) allValid = false;
         });
 
         if (!allValid) {
-            e.preventDefault(); // bloquea envío si hay errores
+            e.preventDefault();
         }
     });
 

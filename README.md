@@ -11,7 +11,7 @@ Aplicación web para la gestión y visualización de créditos otorgados a clien
 ```sh
 git clone https://github.com/AsafArevir/creditos.git
 ```
-#### Ingresar a la Carpeta
+#### Ingresa a la Carpeta
 
 ```sh
 cd creditos
@@ -72,11 +72,10 @@ python datos.py
 
 ## Características principales
 
-- Registro, edición y eliminación de créditos.
+- Listado, registro, edición y eliminación de créditos.
 - Visualización de créditos en tabla y gráfica por cliente.
 - Filtros dinámicos por monto para la gráfica.
 - Validaciones de formularios en frontend.
-- Interfaz moderna y responsiva.
 - API RESTful para operaciones CRUD y estadísticas.
 
 ---

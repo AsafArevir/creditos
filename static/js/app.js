@@ -1,6 +1,7 @@
 let editMode = false;
 let deleteId = null;
 
+// Función para obtener los créditos
 async function fetchCredits() {
     const res = await fetch("/api/creditos");
     const data = await res.json();
@@ -27,16 +28,20 @@ async function fetchCredits() {
         tbody.appendChild(tr);
     });
 }
+
+// Función para abrrir el modal de confirmación para eliminar
 function openConfirmModal(id) {
   deleteId = id;
   document.getElementById("confirmModal").classList.remove("hidden");
 }
 
+// Función para cerrar el modal de confirmación
 function closeConfirmModal() {
   deleteId = null;
   document.getElementById("confirmModal").classList.add("hidden");
 }
 
+// Función para eliminar un crédito
 document.getElementById("confirmDeleteBtn").addEventListener("click", async () => {
   if (!deleteId) return;
   const res = await fetch(`/api/creditos/${deleteId}`, { method: "DELETE" });
@@ -50,7 +55,9 @@ document.getElementById("confirmDeleteBtn").addEventListener("click", async () =
   }
 });
 
-// Modal helpers
+// Función para abrir el modal de registro
+// Recibe un booleano para saber si es para editar o registrar
+// Recibe el crédito si es para editar
 function openModal(isEdit = false, credit = null) {
     const modal = document.getElementById("modal");
     const title = document.getElementById("modalTitle");
@@ -68,9 +75,6 @@ function openModal(isEdit = false, credit = null) {
         form.tasa_interes.value = credit.tasa_interes;
         form.plazo.value = credit.plazo;
         form.fecha_otorgamiento.value = credit.fecha_otorgamiento;
-
-        // Deshabilitar fecha en edición
-        form.fecha_otorgamiento.disabled = true;
     } else {
         title.textContent = "Registrar Crédito";
         clearForm();
@@ -78,6 +82,7 @@ function openModal(isEdit = false, credit = null) {
     }
 }
 
+// Función para cerrar el modal de registro/edición
 function closeModal() {
     const modal = document.getElementById("modal");
     modal.classList.add("hidden");
@@ -85,6 +90,7 @@ function closeModal() {
     clearForm();
 }
 
+// Función para limpiar el formulario de registro cuando se cancela
 function clearForm() {
     const form = document.getElementById("creditForm");
     form.reset();
@@ -125,7 +131,9 @@ document.getElementById("creditForm").addEventListener("submit", async (e) => {
 });
 
 
-// Chart.js
+// Función para obtener estadísticas
+// Muestra las estadísticas de los créditos en el gráfico
+// Recibe un rango de montos
 let chart;
 const floatRegex = /^\d+(\.\d{1,2})?$/;
 
@@ -194,7 +202,7 @@ async function fetchSummary(min = null, max = null) {
     });
 }
 
-// Aplicar filtros
+// Funcion para aplicar filtros y actualizar gráfico
 function applyFilters() {
     const minInput = document.getElementById("minMonto");
     const maxInput = document.getElementById("maxMonto");
@@ -231,12 +239,11 @@ function applyFilters() {
         maxInput.classList.add("input-error");
         valid = false;
     } else {
-        // reset mensaje si vuelve a estar correcto
         maxError.textContent =
             "Ingrese un número válido con máximo 2 decimales.";
     }
 
-    if (!valid) return; // no continuar si hay errores
+    if (!valid) return;
 
     fetchSummary(minVal || null, maxVal || null);
 }
@@ -249,10 +256,9 @@ document.addEventListener("DOMContentLoaded", () => {
         applyFilters();
     });
 
-    // cargar datos iniciales sin filtros
     fetchSummary();
 });
 
-// Inicialización
+// Inicialización de la tabla de créditos y el gráfico
 fetchCredits();
 fetchSummary();

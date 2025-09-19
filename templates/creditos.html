@@ -39,13 +39,13 @@
     <h3>Filtros</h3>
     <form id="chartForm">
       <label for="minMonto">Monto mínimo:</label>
-      <input type="text" id="minMonto" placeholder="0" />
+      <input type="text" id="minMonto" placeholder="Ingrese el monto mínimo" />
       <p id="minMonto-error" class="error-message">
         Ingrese un número válido con máximo 2 decimales.
       </p>
 
       <label for="maxMonto">Monto máximo:</label>
-      <input type="text" id="maxMonto" placeholder="10000" />
+      <input type="text" id="maxMonto" placeholder="Ingrese el monto máximo" />
       <p id="maxMonto-error" class="error-message">
         Ingrese un número válido con máximo 2 decimales.
       </p>
@@ -67,6 +67,7 @@
   </div>
 </div>
 
+<!-- Modal confirmar eliminación -->
 <div id="confirmModal" class="modal hidden">
   <div class="modal-content">
     <h2>Confirmar eliminación</h2>
@@ -78,5 +79,5 @@
   </div>
 </div>
 
-<!-- Incluir el modal desde otro template -->
+<!-- Modal registro -->
 {% include "form_credito.html" %} {% endblock %}

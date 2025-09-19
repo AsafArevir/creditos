@@ -6,6 +6,7 @@ from datetime import date
 # Inicialización de la instancia de SQLAlchemy
 db = SQLAlchemy()
 
+# Definición del modelo Credito
 class Credito(db.Model):
     __tablename__ = 'creditos'
     

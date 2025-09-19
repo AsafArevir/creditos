@@ -24,4 +24,4 @@ with app.app_context():
     db.session.bulk_save_objects(creditos)
     db.session.commit()
 
-    print("✅ Base de datos inicializada con datos de ejemplo.")
+    print("Base de datos inicializada con datos de ejemplo.")

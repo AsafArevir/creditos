@@ -5,22 +5,20 @@ from models import db, Credito
 from sqlalchemy.sql import func
 from datetime import date
 
-
+# Función para obtener todos los créditos
 def get_all_creditos():
-    # Obtiene todos los créditos de la base de datos.
     creditos = Credito.query.all()
     return creditos
 
-
+# Función para obtener un crédito por su ID
 def get_credito_by_id(credito_id):
     credito = db.session.get(Credito, credito_id)
     if not credito:
         abort(404)
     return credito
 
-
+# Función para crear un nuevo crédito
 def create_credito(data):
-    # Crea un nuevo crédito en la base de datos.
     fecha = data["fecha_otorgamiento"]
     if isinstance(fecha, str):
         fecha = date.fromisoformat(fecha)
@@ -36,22 +34,24 @@ def create_credito(data):
     db.session.commit()
     return nuevo_credito
 
-
+# Función para actualizar un crédito
 def update_credito(credito_id, data):
-    # Actualiza un crédito existente.
     credito = db.session.get(Credito, credito_id)
     if not credito:
         abort(404)
+    fecha = data["fecha_otorgamiento"]
+    if isinstance(fecha, str):
+        fecha = date.fromisoformat(fecha)
     credito.cliente = data.get("cliente", credito.cliente)
     credito.monto = data.get("monto", credito.monto)
     credito.tasa_interes = data.get("tasa_interes", credito.tasa_interes)
     credito.plazo = data.get("plazo", credito.plazo)
+    credito.fecha_otorgamiento = fecha
     db.session.commit()
     return credito
 
-
+# Función para eliminar un crédito
 def delete_credito(credito_id):
-    # Elimina un crédito de la base de datos.
     credito = db.session.get(Credito, credito_id)
     if not credito:
         abort(404)
@@ -59,6 +59,7 @@ def delete_credito(credito_id):
     db.session.commit()
     return True
 
+# Función para obtener estadísticas
 def get_statistics(min_monto=None, max_monto=None):
     query = db.session.query(Credito)
 
@@ -67,7 +68,7 @@ def get_statistics(min_monto=None, max_monto=None):
     if max_monto is not None:
         query = query.filter(Credito.monto <= max_monto)
 
-    # calcular total respetando filtros
+    # calcular total en base a los filtros
     total = query.with_entities(func.sum(Credito.monto)).scalar() or 0
     total_count = query.with_entities(func.count(Credito.id)).scalar() or 0
 

@@ -86,6 +86,14 @@ body {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
+.card {
+    background: white;
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
 .table {
     width: 100%;
     border-collapse: collapse;
@@ -103,7 +111,6 @@ body {
     border-bottom: 1px solid #ddd;
 }
 
-/* Chart style */
 .chart-container {
     display: flex;
     gap: 20px;
@@ -111,10 +118,11 @@ body {
 }
 
 .chart-wrapper {
-    flex: 3; /* la gráfica ocupa más espacio */
+    flex: 3;
 }
 
 .chart-filters {
+    width: 100%;
     flex: 1;
     background: #f9fafb;
     padding: 12px;
